@@ -1,16 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Diagnostics;
-using System.IO;
-using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
-using System.Threading;
-using System.Windows;
 using System.Windows.Automation;
-using System.Windows.Forms;
-using System.Xml.Linq;
-using System.Xml.XPath;
-using System.Xml.Resolvers;
+using WindowsDriver.AutomationFramework;
 using WindowsDriver.Requests;
 using WindowsDriver.Requests.Return;
 
@@ -24,269 +16,6 @@ namespace WindowsDriver.Controllers
         [HttpDelete("{sessionId}")]
         [Produces("application/json")]
         public IActionResult DeleteSession(string sessionId)
-        {
-            throw new NotImplementedException();
-        }
-
-        [HttpPost("{sessionId}/actions")]
-        [Produces("application/json")]
-        public IActionResult PerformActions(string sessionId)
-        {
-            throw new NotImplementedException();
-        }
-
-        [HttpDelete("{sessionId}/actions")]
-        [Produces("application/json")]
-        public IActionResult ReleaseActions(string sessionId)
-        {
-            throw new NotImplementedException();
-        }
-
-        [HttpPost("{sessionId}/alert/accept")]
-        [Produces("application/json")]
-        public IActionResult AcceptAlert(string sessionId)
-        {
-            throw new NotImplementedException();
-        }
-
-        [HttpPost("{sessionId}/alert/dismiss")]
-        [Produces("application/json")]
-        public IActionResult DismissAlert(string sessionId)
-        {
-            throw new NotImplementedException();
-        }
-
-        [HttpGet("{sessionId}/alert/text")]
-        [Produces("application/json")]
-        public IActionResult GetAlertText(string sessionId)
-        {
-            throw new NotImplementedException();
-        }
-
-        [HttpPost("{sessionId}/alert/text")]
-        [Produces("application/json")]
-        public IActionResult SendAlertText(string sessionId)
-        {
-            throw new NotImplementedException();
-        }
-
-        [HttpPost("{sessionId}/back")]
-        [Produces("application/json")]
-        public IActionResult Back(string sessionId)
-        {
-            throw new NotImplementedException();
-        }
-
-        [HttpDelete("{sessionId}/cookie")]
-        [Produces("application/json")]
-        public IActionResult DeleteAllCookies(string sessionId)
-        {
-            throw new NotImplementedException();
-        }
-
-        [HttpGet("{sessionId}/cookie")]
-        [Produces("application/json")]
-        public IActionResult GetAllCookies(string sessionId)
-        {
-            throw new NotImplementedException();
-        }
-
-        [HttpPost("{sessionId}/cookie")]
-        [Produces("application/json")]
-        public IActionResult AddCookie(string sessionId)
-        {
-            throw new NotImplementedException();
-        }
-
-        [HttpGet("{sessionId}/cookie/{name}")]
-        [Produces("application/json")]
-        public IActionResult GetNamedCookie(string sessionId)
-        {
-            throw new NotImplementedException();
-        }
-
-        [HttpDelete("{sessionId}/cookie/{name}")]
-        [Produces("application/json")]
-        public IActionResult DeleteCookie(string sessionId)
-        {
-            string xml = "";
-
-            XDocument xDoc = XDocument.Parse(xml);
-
-            Console.WriteLine(xDoc.XPathSelectElement("//h3").Value);
-
-
-
-
-
-
-            throw new NotImplementedException();
-        }
-
-        [HttpPost("{SessionId}/element")]
-        [Produces("application/json")]
-        public IActionResult FindElement(Find find, string SessionId)
-        {
-            throw new NotImplementedException();
-        }
-
-        [HttpGet("{sessionId}/element/{element_id}/attribute/{name}")]
-        [Produces("application/json")]
-        public IActionResult GetElementAttribute(string sessionId)
-        {
-            throw new NotImplementedException();
-        }
-
-        [HttpPost("{sessionId}/element/{element_id}/clear")]
-        [Produces("application/json")]
-        public IActionResult ElementClear(string sessionId)
-        {
-            throw new NotImplementedException();
-        }
-
-        [HttpPost("{sessionId}/element/{element_id}/click")]
-        [Produces("application/json")]
-        public IActionResult ElementClick(string sessionId)
-        {
-            throw new NotImplementedException();
-        }
-
-        [HttpGet("{sessionId}/element/{element_id}/css/{property_name}")]
-        [Produces("application/json")]
-        public IActionResult GetElementCSSValue(string sessionId)
-        {
-            throw new NotImplementedException();
-        }
-
-        [HttpPost("{sessionId}/element/{element_id}/element")]
-        [Produces("application/json")]
-        public IActionResult FindElementFromElement(string sessionId)
-        {
-            throw new NotImplementedException();
-        }
-
-        [HttpPost("{sessionId}/element/{element_id}/elements")]
-        [Produces("application/json")]
-        public IActionResult FindElementsFromElement(string sessionId)
-        {
-            throw new NotImplementedException();
-        }
-
-        [HttpGet("{sessionId}/element/{element_id}/enabled")]
-        [Produces("application/json")]
-        public IActionResult IsElementEnabled(string sessionId)
-        {
-            throw new NotImplementedException();
-        }
-
-        [HttpGet("{sessionId}/element/{element_id}/name")]
-        [Produces("application/json")]
-        public IActionResult GetElementTagName(string sessionId)
-        {
-            throw new NotImplementedException();
-        }
-
-        [HttpGet("{sessionId}/element/{element_id}/property/{name}")]
-        [Produces("application/json")]
-        public IActionResult GetElementProperty(string sessionId)
-        {
-            throw new NotImplementedException();
-        }
-
-        [HttpGet("{sessionId}/element/{element_id}/rect")]
-        [Produces("application/json")]
-        public IActionResult GetElementRect(string sessionId)
-        {
-            throw new NotImplementedException();
-        }
-
-        [HttpGet("{sessionId}/element/{element_id}/screenshot")]
-        [Produces("application/json")]
-        public IActionResult TakeElementScreenshot(string sessionId)
-        {
-            throw new NotImplementedException();
-        }
-
-        [HttpGet("{sessionId}/element/{element_id}/selected")]
-        [Produces("application/json")]
-        public IActionResult IsElementSelected(string sessionId)
-        {
-            throw new NotImplementedException();
-        }
-
-        [HttpGet("{sessionId}/element/{element_id}/text")]
-        [Produces("application/json")]
-        public IActionResult GetElementText(string sessionId)
-        {
-            throw new NotImplementedException();
-        }
-
-        [HttpPost("{sessionId}/element/{element_id}/value")]
-        [Produces("application/json")]
-        public IActionResult ElementSendKeys(string sessionId)
-        {
-            throw new NotImplementedException();
-        }
-
-        [HttpGet("{sessionId}/element/active")]
-        [Produces("application/json")]
-        public IActionResult GetActiveElement(string sessionId)
-        {
-            throw new NotImplementedException();
-        }
-
-        [HttpPost("{sessionId}/elements")]
-        [Produces("application/json")]
-        public IActionResult FindElements(string sessionId)
-        {
-            throw new NotImplementedException();
-        }
-
-        [HttpPost("{sessionId}/execute/async")]
-        [Produces("application/json")]
-        public IActionResult ExecuteAsyncScript(string sessionId)
-        {
-            throw new NotImplementedException();
-        }
-
-        [HttpPost("{sessionId}/execute/sync")]
-        [Produces("application/json")]
-        public IActionResult ExecuteScript(string sessionId)
-        {
-            throw new NotImplementedException();
-        }
-
-        [HttpPost("{sessionId}/forward")]
-        [Produces("application/json")]
-        public IActionResult Forward(string sessionId)
-        {
-            throw new NotImplementedException();
-        }
-
-        [HttpPost("{sessionId}/frame")]
-        [Produces("application/json")]
-        public IActionResult SwitchToFrame(string sessionId)
-        {
-            throw new NotImplementedException();
-        }
-
-        [HttpPost("{sessionId}/frame/parent")]
-        [Produces("application/json")]
-        public IActionResult SwitchToParentFrame(string sessionId)
-        {
-            throw new NotImplementedException();
-        }
-
-        [HttpGet("{sessionId}/print")]
-        [Produces("application/json")]
-        public IActionResult PrintPage(string sessionId)
-        {
-            throw new NotImplementedException();
-        }
-
-        [HttpPost("{sessionId}/refresh")]
-        [Produces("application/json")]
-        public IActionResult Refresh(string sessionId)
         {
             throw new NotImplementedException();
         }
@@ -322,20 +51,6 @@ namespace WindowsDriver.Controllers
         [HttpGet("{sessionId}/title")]
         [Produces("application/json")]
         public IActionResult GetTitle(string sessionId)
-        {
-            throw new NotImplementedException();
-        }
-
-        [HttpPost("{sessionId}/url")]
-        [Produces("application/json")]
-        public IActionResult Go(string sessionId)
-        {
-            throw new NotImplementedException();
-        }
-
-        [HttpGet("{sessionId}/url")]
-        [Produces("application/json")]
-        public IActionResult GetCurrentURL(string sessionId)
         {
             throw new NotImplementedException();
         }
@@ -405,120 +120,25 @@ namespace WindowsDriver.Controllers
         }
 
 
-
-
-
-
-        //// GET: Session
-        //public ActionResult Index()
-        //{
-        //    return View();
-        //}
-
-        //// GET: Session/Details/5
-        //public ActionResult Details(int id)
-        //{
-        //    return View();
-        //}
-
-        //// GET: Session/Create
-        //public ActionResult Create()
-        //{
-        //    return View();
-        //}
-
-        //// POST: Session/Create
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Create(IFormCollection collection)
-        //{
-        //    try
-        //    {
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
-
-        //// GET: Session/Edit/5
-        //public ActionResult Edit(int id)
-        //{
-        //    return View();
-        //}
-
-        //// POST: Session/Edit/5
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Edit(int id, IFormCollection collection)
-        //{
-        //    try
-        //    {
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
-
         [HttpPost]
         [Produces("application/json")]
         public IActionResult NewSession(NewSession newSession)
         {
-            Console.WriteLine($"[WindowsDriver] {this.RouteData}");
+            string applicationPath = newSession.capabilities.firstMatch[0].app;
+            var application = AppController.Launch(applicationPath);
 
             ReturnSession session = new()
             {
-                value = new Value
+                value = new Requests.Return.Value
                 {
                     capabilities = new Requests.Return.Capabilities()
                 }
             };
 
-            session.value.capabilities.app = newSession.capabilities.firstMatch[0].app;
+            session.value.capabilities.app = applicationPath;
             session.value.capabilities.platformName = newSession.capabilities.firstMatch[0].platformName;
-            var application = AppController.Launch(session.value.capabilities.app);
-  
-            
-            string tempGUID = $"00000000-0000-0000-0000-{application.Handle.ToInt64().ToString().PadLeft(12, '0')}";
-            var lsls = Guid.Parse(tempGUID);
-            session.value.sessionId = tempGUID;
-           // session.value.sessionId = application.Handle.ToInt64().ToString();
+            session.value.sessionId = $"00000000-0000-0000-0000-{application.Handle.ToInt64().ToString().PadLeft(12, '0')}";
 
-
-
-            ////// var kdflks = test.Handle.ToString();
-            ////// var kdflkss = test.Handle.ToInt64().ToString();
-            ////// var kdflkssss = kdflkss.ToString();
-
-
-            ////// IntPtr handle = new IntPtr(Convert.ToInt64(kdflkssss, 16));
-            ////// IntPtr handle2 = new IntPtr(Convert.ToInt64(kdflkssss));
-            ////// IntPtr handle3 = new IntPtr(Convert.ToInt64(session.value.sessionId));
-
-
-
-            ////// Console.WriteLine($"[WindowsDriver] {session}");
-
-            ////// Process process = Process.GetProcessById(test.Id);
-            ////// Thread.Sleep(1000);
-            //////GetElement(test.Handle);
-
-            ////// //elementz.Add((element as AutomationElement).Current);
-
-            ////// //var value = (element as AutomationElement).Current.NativeWindowHandle;
-            ////// //var sksks = AutomationElement.FromHandle(new IntPtr(value));
-
-            ////// process.CloseMainWindow();
-            //////// process.Close();
-            ////// Thread.Sleep(1000);
-
-            ////// if (!process.HasExited)
-            ////// {
-            //////     process.Kill();
-            ////// }
             return StatusCode(200, session);
         }
 
@@ -526,9 +146,7 @@ namespace WindowsDriver.Controllers
         [Produces("application/json")]
         public IActionResult CloseApp(string sessionId)
         {
-            var id = sessionId.Split('-').Last().TrimStart('0');
-
-            var app = AutomationElement.FromHandle(new IntPtr(Convert.ToInt64(id)));
+            var app = Utilities.GetApplicationRoot(sessionId);
             var process = Process.GetProcessById(app.Current.ProcessId);
 
             process.CloseMainWindow();
@@ -575,73 +193,10 @@ namespace WindowsDriver.Controllers
 
 
 
-        public static void GetElement(IntPtr app)
-        {
-           // PropertyCondition con = new PropertyCondition(AutomationElement.ClassNameProperty, "Notepad");
-            PropertyCondition con = new PropertyCondition(AutomationElement.AutomationIdProperty, "TitleBar");
-            //TitleBar
-
-            var result2 = AutomationElement.FromHandle(app);
-            var kdkddd = result2.Current.ControlType;
-
-           // System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(Type.GetType(AutomationElementInformation.));
-
-
-            //string xml = "";
-            //using (var sww = new StringWriter())
-            //{
-            //    using (XmlWriter writer = XmlWriter.Create(sww))
-            //    {
-            //        x.Serialize(writer, result2.Current);
-            //        xml = sww.ToString(); // Your XML
-            //    }
-            //}
-            //Console.WriteLine(xml);
-
-
-            con = new PropertyCondition(AutomationElement.ClassNameProperty, "RichEditD2DPT");
-            result2 = result2.FindFirst(TreeScope.Descendants, con);
-
-            result2.SetFocus();
-            SendKeys.SendWait("^{END}");
-            SendKeys.SendWait("12345zz");
-
-
-           // Point p = result2.GetClickablePoint();
-           // var inputSimulator = new InputSimulator();
-           // inputSimulator.Mouse.MoveMouseTo(p.X, p.Y);
-           // inputSimulator.Mouse.MoveMouseTo(3000, 3000);
-          //  result2.SetFocus();
-            LeftClick(result2);
-          //  inputSimulator.Mouse.RightButtonClick();
-
-            Thread.Sleep(10000);
-          //  Mouse.Click(MouseButton.Left);
-
-
-            var kdkd  = ((ValuePattern)result2.GetCurrentPattern(ValuePattern.Pattern)).Current.Value;
-            //result2 = result2.FindFirst(TreeScope.Descendants, con);
-
-             var sksks = AutomationElement.FromHandle(app);
-            sksks = AutomationElement.FromHandle(new IntPtr(result2.Current.NativeWindowHandle));
-
-
-            var xml = SerializeObjectz(sksks.Current);
-            //
-        }
 
 
 
 
-
-
-
-
-
-        public static IntPtr ElementPointer(string value)
-        {
-            return new IntPtr(int.Parse(value));
-        }
 
 
 
@@ -669,31 +224,7 @@ namespace WindowsDriver.Controllers
             }
         }
 
-        [DllImport("user32.dll")]
-        static extern void mouse_event(int dwFlags, int dx, int dy,
-                      int dwData, int dwExtraInfo);
 
-        [Flags]
-        public enum MouseEventFlags
-        {
-            LEFTDOWN = 0x00000002,
-            LEFTUP = 0x00000004,
-            MIDDLEDOWN = 0x00000020,
-            MIDDLEUP = 0x00000040,
-            MOVE = 0x00000001,
-            ABSOLUTE = 0x00008000,
-            RIGHTDOWN = 0x00000008,
-            RIGHTUP = 0x00000010
-        }
-
-        public static void LeftClick(AutomationElement element)
-        {
-            element.SetFocus();
-            System.Windows.Point p = element.GetClickablePoint();
-            Cursor.Position = new System.Drawing.Point((int)p.X, (int)p.Y);
-            mouse_event((int)(MouseEventFlags.RIGHTDOWN), 0, 0, 0, 0);
-            mouse_event((int)(MouseEventFlags.RIGHTUP), 0, 0, 0, 0);
-        }
 
 
 
