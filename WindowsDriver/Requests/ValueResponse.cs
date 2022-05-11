@@ -6,4 +6,12 @@
         public object value { get; set; }
 
     }
+
+
+    public class ValueArrayResponse
+    {
+        public string sessionId { get; set; }
+        public object[] value { get; set; }
+    }
+
 }

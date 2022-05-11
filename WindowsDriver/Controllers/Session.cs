@@ -31,7 +31,15 @@ namespace WindowsDriver.Controllers
         [Produces("application/json")]
         public IActionResult GetPageSource(string sessionId)
         {
-            throw new NotImplementedException();
+            var app = Utilities.GetApplicationRoot(sessionId);
+
+            ValueResponse valueResponse = new ValueResponse
+            {
+                sessionId = sessionId,
+                value = SudoHtml.GetPageSource(app)
+            };
+
+            return StatusCode(200, valueResponse);
         }
 
         [HttpGet("{sessionId}/timeouts")]
@@ -59,9 +67,32 @@ namespace WindowsDriver.Controllers
         [Produces("application/json")]
         public IActionResult GetWindowHandle(string sessionId)
         {
-            return StatusCode(200, "123");
-            ///throw new NotImplementedException();
+            ValueResponse valueResponse = new ValueResponse
+            {
+                sessionId = sessionId,
+                value = Utilities.GetHandle(sessionId)
+            };
+
+            return StatusCode(200, valueResponse);
         }
+
+        [HttpGet("{sessionId}/window/handles")]
+        [Produces("application/json")]
+        public IActionResult GetWindowHandles(string sessionId)
+        {
+            ValueArrayResponse valueResponse = new ValueArrayResponse
+            {
+                sessionId = sessionId,
+                value = new string[] { Utilities.GetHandle(sessionId).ToString() }
+            };
+
+            return StatusCode(200, valueResponse);
+        }
+
+
+
+
+
 
         [HttpDelete("{sessionId}/window")]
         [Produces("application/json")]
@@ -84,12 +115,6 @@ namespace WindowsDriver.Controllers
             throw new NotImplementedException();
         }
 
-        [HttpGet("{sessionId}/window/handles")]
-        [Produces("application/json")]
-        public IActionResult GetWindowHandles(string sessionId)
-        {
-            return StatusCode(200, "123");
-        }
 
         [HttpPost("{sessionId}/window/maximize")]
         [Produces("application/json")]
@@ -183,6 +208,16 @@ namespace WindowsDriver.Controllers
             return StatusCode(200, new NewValue()); 
         }
 
+
+
+
+
+
+
+
+
+
+        /////// TODO 
         [HttpGet("{id}/timeouts")]
         [Produces("application/json")]
         public IActionResult GetTimeouts(int id)
