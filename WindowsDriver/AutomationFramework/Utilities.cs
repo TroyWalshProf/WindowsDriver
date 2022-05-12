@@ -2,7 +2,6 @@
 using System.Xml;
 using AngleSharp;
 using AngleSharp.Dom;
-using AngleSharp.Html.Dom;
 using AngleSharp.Html.Parser;
 using WindowsDriver.Requests;
 
@@ -62,10 +61,10 @@ namespace WindowsDriver.AutomationFramework
             XmlDocument doc = new XmlDocument();
             doc.LoadXml(SudoHtml.GetPageSource(rootElement));
 
-            XmlNode root = doc.DocumentElement;
+            XmlNode? root = doc.DocumentElement;
 
             // Select all nodes where the book price is greater than 10.00.  
-            XmlNode node = root.SelectSingleNode(xpath);
+            XmlNode? node = root?.SelectSingleNode(xpath);
 
 
 

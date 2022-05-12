@@ -235,13 +235,22 @@ namespace WindowsDriver.Controllers
             RIGHTUP = 0x00000010
         }
 
-        public static void LeftClick(AutomationElement element)
+        public static void RightClick(AutomationElement element)
         {
             element.SetFocus();
             System.Windows.Point p = element.GetClickablePoint();
             Cursor.Position = new System.Drawing.Point((int)p.X, (int)p.Y);
             mouse_event((int)(MouseEventFlags.RIGHTDOWN), 0, 0, 0, 0);
             mouse_event((int)(MouseEventFlags.RIGHTUP), 0, 0, 0, 0);
+        }
+
+        public static void LeftClick(AutomationElement element)
+        {
+            element.SetFocus();
+            System.Windows.Point p = element.GetClickablePoint();
+            Cursor.Position = new System.Drawing.Point((int)p.X, (int)p.Y);
+            mouse_event((int)(MouseEventFlags.LEFTDOWN), 0, 0, 0, 0);
+            mouse_event((int)(MouseEventFlags.LEFTUP), 0, 0, 0, 0);
         }
 
 

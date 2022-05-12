@@ -90,13 +90,6 @@ namespace WindowsDriver.Controllers
             throw new NotImplementedException();
         }
 
-        [HttpPost("{sessionId}/element/{element_id}/click")]
-        [Produces("application/json")]
-        public IActionResult ElementClick(string sessionId)
-        {
-            throw new NotImplementedException();
-        }
-
         [HttpPost("{sessionId}/execute/async")]
         [Produces("application/json")]
         public IActionResult ExecuteAsyncScript(string sessionId)
