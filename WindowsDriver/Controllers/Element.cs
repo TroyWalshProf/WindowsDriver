@@ -8,11 +8,11 @@ namespace WindowsDriver.Controllers
 {
     [ApiController]
     [Route("/wd/hub/session/{sessionId}/element")]
-    public class Element : ControllerBase
+    public class Element : AppiumControllerBase
     {
         [HttpPost]
         [Produces("application/json")]
-        public IActionResult FindElement(Find find, string sessionId)
+        public IActionResult FindElement(FindJson find, string sessionId)
         {
             var response = new ElementJson
             {
@@ -45,7 +45,7 @@ namespace WindowsDriver.Controllers
         {
             var element = Utilities.GetElement(elementId);
             LeftClick(element);
-            return StatusCode(200, new ValueResponse { sessionId = sessionId });
+            return GetTwoHundred(sessionId);
         }
 
         [HttpGet("{elementId}/css/{property_name}")]
@@ -57,14 +57,14 @@ namespace WindowsDriver.Controllers
 
         [HttpPost("{elementId}/element")]
         [Produces("application/json")]
-        public IActionResult FindElementFromElement(Find find, string sessionId, string elementId)
+        public IActionResult FindElementFromElement(FindJson find, string sessionId, string elementId)
         {
             throw new NotImplementedException();
         }
 
         [HttpPost("{elementId}/elements")]
         [Produces("application/json")]
-        public IActionResult FindElementsFromElement(Find find, string sessionId, string elementId)
+        public IActionResult FindElementsFromElement(FindJson find, string sessionId, string elementId)
         {
             throw new NotImplementedException();
         }
@@ -119,15 +119,15 @@ namespace WindowsDriver.Controllers
 
             if (element.TryGetCurrentPattern(ValuePattern.Pattern, out object value))
             {
-                return StatusCode(200, new ValueResponse { sessionId = sessionId, value=(value as ValuePattern).Current.Value });
+                return GetTwoHundred(sessionId, (value as ValuePattern)?.Current.Value);
             }
             else if (element.TryGetCurrentPattern(TextPattern.Pattern, out object text))
             {
-                return StatusCode(200, new ValueResponse { sessionId = sessionId, value = (text as TextPattern).DocumentRange.GetText(-1) });
+                return GetTwoHundred(sessionId, (text as TextPattern)?.DocumentRange.GetText(-1));
             }
             else
             {
-                return StatusCode(200, new ValueResponse { sessionId = sessionId, value = element.Current.Name });
+                return GetTwoHundred(sessionId, element.Current.Name);
             }
         }
 
@@ -135,14 +135,12 @@ namespace WindowsDriver.Controllers
         [Produces("application/json")]
         public IActionResult ElementSendKeys(string sessionId, string elementId, TextJson value)
         {
-
             AutomationElement element = Utilities.GetElement(elementId);
             
             element.SetFocus();
             SendKeys.SendWait(value.text);
 
-
-            return StatusCode(200, new ValueResponse { sessionId = sessionId });
+            return GetTwoHundred(sessionId);
         }
 
 

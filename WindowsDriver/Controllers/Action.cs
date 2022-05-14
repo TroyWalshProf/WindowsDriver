@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
+using WindowsDriver.Requests;
 
 namespace WindowsDriver.Controllers
 {
     [ApiController]
     [Route("/wd/hub/session")]
-    public class Action : ControllerBase
+    public class Action : AppiumControllerBase
     {
         [HttpPost("{sessionId}/actions")]
         [Produces("application/json")]
@@ -16,8 +17,10 @@ namespace WindowsDriver.Controllers
 
 
 
-            WindowsDriver.Requests.Actions deptObj = JsonSerializer.Deserialize<WindowsDriver.Requests.Actions>(value.ToString());
-            throw new NotImplementedException();
+            ActionsJson? deptObj = JsonSerializer.Deserialize<ActionsJson>(value.ToString());
+            return StatusCode(200, null);
+            /// TODO
+          /////  throw new NotImplementedException();
         }
 
         //[HttpPost("{sessionId}/actions")]

@@ -2,7 +2,7 @@
 
 namespace WindowsDriver.Requests
 {
-    public class NewSession
+    public class NewSessionJson
     {
         public Capabilities capabilities { get; set; }
     }

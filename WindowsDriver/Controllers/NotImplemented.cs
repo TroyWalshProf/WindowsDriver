@@ -4,7 +4,7 @@ namespace WindowsDriver.Controllers
 {
     [ApiController]
     [Route("/wd/hub/session")]
-    public class NotImplemented : ControllerBase
+    public class NotImplemented : AppiumControllerBase
     {
         [HttpPost("{sessionId}/alert/accept")]
         [Produces("application/json")]

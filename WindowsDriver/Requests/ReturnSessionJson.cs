@@ -7,7 +7,7 @@ namespace WindowsDriver.Requests.Return
 {
 
 
-    public class ReturnSession
+    public class ReturnSessionJson
     {
         public Value value { get; set; }
     }

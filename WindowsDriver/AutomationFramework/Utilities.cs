@@ -21,20 +21,20 @@ namespace WindowsDriver.AutomationFramework
         }
 
 
-        public static string FindElementShortcut(Find find, string sessionId)
+        public static string FindElementShortcut(FindJson find, string sessionId)
         {
-            AutomationElement element = FindElement(find,sessionId);
+            AutomationElement element = FindElement(find, sessionId);
             int nativeHandle = element.Current.NativeWindowHandle;
-            var runtime  = element.GetRuntimeId();
+            var runtime = element.GetRuntimeId();
 
             bool complexElementFind = false;
-            
+
             if (nativeHandle == 0)
             {
                 TreeWalker walker = TreeWalker.ControlViewWalker;
 
                 complexElementFind = true;
-                
+
                 while (nativeHandle == 0)
                 {
                     element = walker.GetParent(element);
@@ -54,8 +54,8 @@ namespace WindowsDriver.AutomationFramework
 
         public static AutomationElement? FindElementByXPath(AutomationElement rootElement, string xpath)
         {
-           // var document = SudoHtml.GetHtmlDocument(rootElement);
-           // var node = document.DocumentNode.SelectSingleNode(xpath);
+            // var document = SudoHtml.GetHtmlDocument(rootElement);
+            // var node = document.DocumentNode.SelectSingleNode(xpath);
 
 
             XmlDocument doc = new XmlDocument();
@@ -89,19 +89,19 @@ namespace WindowsDriver.AutomationFramework
             return GetElement(rootElement, element.Attributes["runtimeid"].Value);
         }
 
-        public static AutomationElement FindElement(Find find, string sessionId)
+        public static AutomationElement FindElement(FindJson find, string sessionId)
         {
             var app = GetApplicationRoot(sessionId);
             return FindElement(app, find);
         }
 
-        public static AutomationElementCollection FindElements(Find find, string sessionId)
+        public static AutomationElementCollection FindElements(FindJson find, string sessionId)
         {
             var app = Utilities.GetApplicationRoot(sessionId);
             return FindElements(app, find);
         }
 
-        public static AutomationElement FindElement(AutomationElement root, Find find)
+        public static AutomationElement FindElement(AutomationElement root, FindJson find)
         {
             switch (find._using.ToLower())
             {
@@ -128,7 +128,7 @@ namespace WindowsDriver.AutomationFramework
         }
 
 
-        public static AutomationElementCollection FindElements(AutomationElement root, Find find)
+        public static AutomationElementCollection FindElements(AutomationElement root, FindJson find)
         {
             switch (find._using.ToLower())
             {
@@ -146,7 +146,7 @@ namespace WindowsDriver.AutomationFramework
 
         public static AutomationElement GetElement(string NavtiveSelector)
         {
-            var splitHandle= NavtiveSelector.Split('_');
+            var splitHandle = NavtiveSelector.Split('_');
             var element = AutomationElement.FromHandle(new IntPtr(Convert.ToInt64(splitHandle[0])));
 
             if (splitHandle.Length > 1)
@@ -163,7 +163,7 @@ namespace WindowsDriver.AutomationFramework
         }
 
 
-        private static PropertyCondition Condition(Find find)
+        private static PropertyCondition Condition(FindJson find)
         {
             switch (find._using.ToLower())
             {
@@ -176,6 +176,12 @@ namespace WindowsDriver.AutomationFramework
                 default:
                     throw new NotImplementedException();
             }
+        }
+
+        public static void Resize(AutomationElement applicationRoot, WindowVisualState state)
+        {
+            var pattern = applicationRoot.GetCurrentPattern(WindowPattern.Pattern) as WindowPattern;
+            pattern?.SetWindowVisualState(state);
         }
     }
 }

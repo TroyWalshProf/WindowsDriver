@@ -10,7 +10,7 @@ namespace WindowsDriver.Controllers
 {
     [ApiController]
     [Route("/wd/hub/session")]
-    public class Session : ControllerBase
+    public class Session : AppiumControllerBase
     {
 
         [HttpDelete("{sessionId}")]
@@ -32,14 +32,7 @@ namespace WindowsDriver.Controllers
         public IActionResult GetPageSource(string sessionId)
         {
             var app = Utilities.GetApplicationRoot(sessionId);
-
-            ValueResponse valueResponse = new ValueResponse
-            {
-                sessionId = sessionId,
-                value = SudoHtml.GetPageSource(app)
-            };
-
-            return StatusCode(200, valueResponse);
+            return GetTwoHundred(sessionId, SudoHtml.GetPageSource(app));
         }
 
         [HttpGet("{sessionId}/timeouts")]
@@ -67,20 +60,14 @@ namespace WindowsDriver.Controllers
         [Produces("application/json")]
         public IActionResult GetWindowHandle(string sessionId)
         {
-            ValueResponse valueResponse = new ValueResponse
-            {
-                sessionId = sessionId,
-                value = Utilities.GetHandle(sessionId)
-            };
-
-            return StatusCode(200, valueResponse);
+            return GetTwoHundred(sessionId, Utilities.GetHandle(sessionId));
         }
 
         [HttpGet("{sessionId}/window/handles")]
         [Produces("application/json")]
         public IActionResult GetWindowHandles(string sessionId)
         {
-            ValueArrayResponse valueResponse = new ValueArrayResponse
+            ValueArrayResponseJson valueResponse = new ValueArrayResponseJson
             {
                 sessionId = sessionId,
                 value = new string[] { Utilities.GetHandle(sessionId).ToString() }
@@ -120,15 +107,21 @@ namespace WindowsDriver.Controllers
         [Produces("application/json")]
         public IActionResult MaximizeWindow(string sessionId)
         {
-            throw new NotImplementedException();
+            var app = Utilities.GetApplicationRoot(sessionId);
+            Utilities.Resize(app, WindowVisualState.Maximized);
+            return GetTwoHundred(sessionId);
         }
 
         [HttpPost("{sessionId}/window/minimize")]
         [Produces("application/json")]
         public IActionResult MinimizeWindow(string sessionId)
         {
-            throw new NotImplementedException();
+            var app = Utilities.GetApplicationRoot(sessionId);
+            Utilities.Resize(app, WindowVisualState.Minimized);
+            return GetTwoHundred(sessionId);
         }
+
+
 
         [HttpGet("{sessionId}/window/rect")]
         [Produces("application/json")]
@@ -147,12 +140,12 @@ namespace WindowsDriver.Controllers
 
         [HttpPost]
         [Produces("application/json")]
-        public IActionResult NewSession(NewSession newSession)
+        public IActionResult NewSession(NewSessionJson newSession)
         {
             string applicationPath = newSession.capabilities.firstMatch[0].app;
             var application = AppController.Launch(applicationPath);
 
-            ReturnSession session = new()
+            ReturnSessionJson session = new()
             {
                 value = new Requests.Return.Value
                 {
@@ -182,12 +175,7 @@ namespace WindowsDriver.Controllers
                 process.Kill();
             }
 
-            var response = new ValueResponse
-            {
-                sessionId = sessionId
-            };
-
-            return StatusCode(200, response);
+            return GetTwoHundred(sessionId);
         }
 
         [HttpDelete("{id}")]
@@ -249,17 +237,13 @@ namespace WindowsDriver.Controllers
 
         public static string Serialize(object obj)
         {
-            using (MemoryStream memoryStream = new MemoryStream())
-            using (StreamReader reader = new StreamReader(memoryStream))
-            {
-                DataContractSerializer serializer = new DataContractSerializer(obj.GetType());
-                serializer.WriteObject(memoryStream, obj);
-                memoryStream.Position = 0;
-                return reader.ReadToEnd();
-            }
+            using MemoryStream memoryStream = new MemoryStream();
+            using StreamReader reader = new StreamReader(memoryStream);
+            DataContractSerializer serializer = new DataContractSerializer(obj.GetType());
+            serializer.WriteObject(memoryStream, obj);
+            memoryStream.Position = 0;
+            return reader.ReadToEnd();
         }
-
-
 
 
 

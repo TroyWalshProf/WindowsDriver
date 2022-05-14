@@ -1,11 +1,11 @@
 ﻿namespace WindowsDriver.Requests
 {
-    public class Actions
+    public class ActionsJson
     {
-        public Action[] actions { get; set; }
+        public Actions[] actions { get; set; }
     }
 
-    public class Action
+    public class Actions
     {
         public string type { get; set; }
         public string id { get; set; }
